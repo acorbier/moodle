@@ -457,7 +457,7 @@ class address_manager {
      */
     protected function pack_int($int) {
         if (PHP_INT_SIZE === 8) {
-			if ($int == -1) { // just the value -1, other negative numbers not managed
+            if ($int == -1) { // just the value -1, other negative numbers not managed
                 $l = 0x00000000ffffffff ;
                 $r = 0x00000000ffffffff ;
             }

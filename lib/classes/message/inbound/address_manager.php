@@ -457,9 +457,14 @@ class address_manager {
      */
     protected function pack_int($int) {
         if (PHP_INT_SIZE === 8) {
-            $l = intdiv($int, pow(2, 32)); // 32-bit integer quotient.
-            $r = $int % pow(2, 32); // 32-bit integer remaining.
-
+			if ($int == -1) { // just the value -1, other negative numbers not managed
+                $l = 0x00000000ffffffff ;
+                $r = 0x00000000ffffffff ;
+            }
+            else {
+                $l = intdiv($int, pow(2, 32)); // 32-bit integer quotient.
+                $r = $int % pow(2, 32); // 32-bit integer remaining.
+            }
             return pack('NN', $l, $r);
         } else {
             return pack('NN', 0, $int);
